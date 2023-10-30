@@ -1,0 +1,103 @@
+html {
+  box-sizing: border-box;
+}
+
+::after,
+::before {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  min-width: 1300px;
+  font-family: "OpenSuns", "Arial", "sans-serif";
+  line-height: normal;
+  background: #f1f1f1;
+}
+
+/* glob */
+.flex {
+  display: flex;
+}
+
+.container {
+  text-align: center;
+  width: 1170px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background-image: url(../images/background-tekstur.jpg);
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 20px;
+  color: rgb(83, 54, 54);
+}
+
+.form {
+  margin-bottom: 20px;
+}
+
+.form__input {
+  padding: 10px;
+  border:1px solid grey;
+  border-radius: 10px;
+}
+
+.list {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 45px;
+  gap: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-image: url(../images/paper800.jpg) ;
+}
+
+.list__shirt {
+  position: absolute;
+  /* content: ''; */
+  height: inherit;
+  width: inherit;
+  border: 5px solid white;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../images/shirtUp.jpg);
+  opacity: 100%;
+}
+
+.list__item {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 230px;
+  width: 160px;
+  border-radius: 10px;
+  color: white;
+  width: 700;
+  font-size: 90px;
+  background-color: grey;
+}
+
+.input {
+  padding: 0;
+}
+
