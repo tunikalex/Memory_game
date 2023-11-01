@@ -1,5 +1,3 @@
-// Этап 1. Создайте функцию, генерирующую массив парных чисел. Пример массива, который должна возвратить функция: [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8].count - количество пар.
-
 function createNumbersArray(count = 8) {
   const arr = [];
   // generate array pear of number
@@ -8,8 +6,6 @@ function createNumbersArray(count = 8) {
   }
   return arr;
 }
-
-// Этап 2. Создайте функцию перемешивания массива.Функция принимает в аргументе исходный массив и возвращает перемешанный массив. arr - массив чисел
 
 function shuffle(arr) {
   const shuffleArr = arr;
@@ -26,8 +22,6 @@ function shuffle(arr) {
 
   return shuffleArr;
 }
-
-// Этап 3. Используйте две созданные функции для создания массива перемешанными номерами. На основе этого массива вы можете создать DOM-элементы карточек. У каждой карточки будет свой номер из массива произвольных чисел. Вы также можете создать для этого специальную функцию. count - количество пар.
 
 function howMuch(callback) {
   document.body.querySelector('input').addEventListener('keydown', function (e) {
@@ -79,7 +73,6 @@ function createInput() {
 
 function crateGamesTable(arr) {
   const list = document.querySelector('ul');
-  let ind = 0;
 
   if (list === null) {
     let list = document.createElement('ul');
@@ -87,50 +80,88 @@ function crateGamesTable(arr) {
     document.querySelector('#main').appendChild(list);
 
     for (let iNum of arr) {
-      const item = document.createElement('il');
+      const item = document.createElement('li');
       const shirtUp = document.createElement('button');
       item.textContent = iNum;
       shirtUp.classList.add('list__shirt');
       item.classList.add('list__item');
-      item.id = ind;
+      shirtUp.id = iNum;
       list.append(item);
       item.append(shirtUp);
-      ind++;
     }
 
   } else {
     list.innerHTML = '';
     for (let iNum of arr) {
-      const item = document.createElement('il');
+      const item = document.createElement('li');
       const shirtUp = document.createElement('button');
       item.textContent = iNum;
       shirtUp.classList.add('list__shirt');
       item.classList.add('list__item');
-      item.id = ind;
+      shirtUp.id = iNum;
       list.append(item);
       item.append(shirtUp);
-      ind++;
     }
   }
 };
 
-
+// функция игрового процесса
 function playGame() {
-  const handleClick = (event) => {
-    console.log(`event.target= ${event.target}`)
-  }
-  const cards = document.querySelectorAll('.list__shirt');
-  console.log(`cards= ${cards}`);
-  for (i of cards) {
-  console.log(`i = ${i}`);
-  }
-  cards.forEach(card => {
-    console.log(`card= ${card}`);
-    card.addEventListener('click', (event) => {
-      console.log(`event.target= ${event.target}`)
-    })
-  })
-  };
+  const cardsList = document.querySelectorAll('.list__shirt');
+  let openLastsCards = [];
+  // перебираем массив с .list__shirt и применяем к каждому элементу обработку события click
+  cardsList.forEach((element) => {
+    element.addEventListener('click', function (event) {
+      element.classList.add('opacity');
+      // формируем массив с id нажатых карточек
+      openLastsCards.push(element.id);
+      console.log(`openLastsCards= ${openLastsCards}`);
+
+
+
+      // если открыты две активных карты и их id равны
+      if (element.classList.contains('open')) {
+        console.log('сработало Open');
+        openLastsCards.pop();
+        element.disabled = true;
+        console.log(`после удаления = ${openLastsCards}`);
+
+      }
+      if (openLastsCards.length == 2 && openLastsCards[0] == openLastsCards[1]) {
+        console.log(`сработало равенство карт`);
+        let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
+        for (iOpen of allOpen) { // делаем кнопки таких карт неактивными
+          iOpen.disabled = true;
+        };
+        element.classList.add('open'); // добавили класс для маркировки открытых карт
+        openLastsCards = []; // обнуляем активные открытые карты
+
+      } else if (openLastsCards.length % 3 == 0) {
+        console.log(`__ сработал else IF __`);
+        let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
+
+        for (iOpen of allOpen) { // перебираем все открытые карты
+          // если список последних карт содержит id открытой карты)
+          if (openLastsCards.includes(iOpen.id)) {
+            iOpen.classList.remove('opacity');
+            iOpen.disabled = false
+            iOpen.classList.remove('open')
+          }
+        }
+        element.classList.add('opacity') // делаем
+        openLastsCards = [];
+        openLastsCards.push(element.id);
+        element.classList.add('open') // обозначаем карту как открытую
+
+
+      } else {
+        console.log(`сработал else`);
+        element.classList.add('open') // обозначаем карту как открытую
+
+      }
+    });
+  });
+}
 
 function startGame() {
   createInput();
@@ -138,8 +169,25 @@ function startGame() {
     let originArr = createNumbersArray(count = quantityNums);
     const shuffleArr = shuffle(arr = originArr);
     crateGamesTable(arr = shuffleArr);
-  })
+    playGame();
+  });
 }
 
 startGame();
-playGame()
+
+
+
+// const handleClick = (event) => {
+//   console.log(`event.target= ${event.target}`)
+// }
+// const cards = document.querySelectorAll('.list__shirt');
+// console.log(`cards= ${cards}`);
+// for (i of cards) {
+// console.log(`i = ${i}`);
+// }
+// cards.forEach(card => {
+//   console.log(`card= ${card}`);
+//   card.addEventListener('click', (event) => {
+//     console.log(`event.target= ${event.target}`)
+//   })
+// })

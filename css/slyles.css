@@ -33,6 +33,10 @@ body {
   display: flex;
 }
 
+.opacity {
+  opacity: 0;
+}
+
 .container {
   text-align: center;
   width: 1170px;
@@ -72,7 +76,6 @@ body {
 
 .list__shirt {
   position: absolute;
-  /* content: ''; */
   height: inherit;
   width: inherit;
   border: 5px solid white;
@@ -80,20 +83,17 @@ body {
   background-size: cover;
   background-position: center;
   background-image: url(../images/shirtUp.jpg);
-  opacity: 100%;
 }
 
 .list__item {
   display: flex;
-  position: relative;
   justify-content: center;
   align-items: center;
   height: 230px;
   width: 160px;
   border-radius: 10px;
   color: white;
-  width: 700;
-  font-size: 90px;
+  font-size: 100px;
   background-color: grey;
 }
 
