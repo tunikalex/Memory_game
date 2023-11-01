@@ -26,6 +26,10 @@ function shuffle(arr) {
 function howMuch(callback) {
   document.body.querySelector('input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
+      console.log(`сработала функция howMuch`); //лог контроля
+      const win = document.querySelector('#win');
+      win.classList.remove('main__win');
+
       const inputValue = Number(this.value);
 
       if (isNaN(inputValue)) {
@@ -52,6 +56,8 @@ function createInput() {
   const title = document.createElement('h1')
   const form = document.createElement('form')
   const input = document.createElement('input');
+  const win = document.createElement('div');
+
 
   title.classList.add('title')
   main.classList.add('container');
@@ -59,7 +65,8 @@ function createInput() {
   form.classList.add('form')
   input.classList.add('form__input');
   input.id = 'input';
-  // input.oninput = 'test = this.value'
+  // win.classList.add('win');
+  win.id = 'win';
 
   title.textContent = 'Memory Game'
   input.placeholder = 'Enter quantity kards'
@@ -68,6 +75,7 @@ function createInput() {
   main.appendChild(title);
   main.appendChild(form);
   form.appendChild(input);
+  form.after(win);
 }
 
 
@@ -108,36 +116,39 @@ function crateGamesTable(arr) {
 // функция игрового процесса
 function playGame() {
   const cardsList = document.querySelectorAll('.list__shirt');
-  let openLastsCards = [];
+  let openLastsCards = []; // создали массив для id нажатых карточек
+
   // перебираем массив с .list__shirt и применяем к каждому элементу обработку события click
   cardsList.forEach((element) => {
     element.addEventListener('click', function (event) {
-      element.classList.add('opacity');
-      // формируем массив с id нажатых карточек
-      openLastsCards.push(element.id);
-      console.log(`openLastsCards= ${openLastsCards}`);
 
-
+      element.classList.add('opacity'); // делаем карточку видимой
+      openLastsCards.push(element.id); // формируем массив с id нажатых карточек
 
       // если открыты две активных карты и их id равны
       if (element.classList.contains('open')) {
-        console.log('сработало Open');
+        console.log('сработало Open'); // лог контроля
         openLastsCards.pop();
         element.disabled = true;
         console.log(`после удаления = ${openLastsCards}`);
-
       }
+
       if (openLastsCards.length == 2 && openLastsCards[0] == openLastsCards[1]) {
-        console.log(`сработало равенство карт`);
+        console.log(`сработало равенство карт`); // лог контроля
         let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
         for (iOpen of allOpen) { // делаем кнопки таких карт неактивными
           iOpen.disabled = true;
         };
         element.classList.add('open'); // добавили класс для маркировки открытых карт
         openLastsCards = []; // обнуляем активные открытые карты
+        if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) {
+          console.log(`сработал win`); // лог контроля
+          const win = document.querySelector('#win');
+          win.classList.add('main__win');
+        }
 
       } else if (openLastsCards.length % 3 == 0) {
-        console.log(`__ сработал else IF __`);
+        console.log(`__ сработал else IF __`); // лог контроля
         let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
 
         for (iOpen of allOpen) { // перебираем все открытые карты
@@ -153,15 +164,14 @@ function playGame() {
         openLastsCards.push(element.id);
         element.classList.add('open') // обозначаем карту как открытую
 
-
       } else {
-        console.log(`сработал else`);
+        console.log(`сработал else`); // лог контроля
         element.classList.add('open') // обозначаем карту как открытую
-
       }
     });
   });
 }
+
 
 function startGame() {
   createInput();
@@ -175,19 +185,3 @@ function startGame() {
 
 startGame();
 
-
-
-// const handleClick = (event) => {
-//   console.log(`event.target= ${event.target}`)
-// }
-// const cards = document.querySelectorAll('.list__shirt');
-// console.log(`cards= ${cards}`);
-// for (i of cards) {
-// console.log(`i = ${i}`);
-// }
-// cards.forEach(card => {
-//   console.log(`card= ${card}`);
-//   card.addEventListener('click', (event) => {
-//     console.log(`event.target= ${event.target}`)
-//   })
-// })

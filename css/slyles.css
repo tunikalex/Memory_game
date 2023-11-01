@@ -48,22 +48,46 @@ body {
 .title {
   margin: 0;
   margin-bottom: 20px;
-  color: rgb(83, 54, 54);
+  color: brown;
+}
+
+.main__win {
+  position: fixed;
+  text-align: center;
+  width: inherit;
+  height: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url(../images/you-win.jpg);
+  z-index: 10;
 }
 
 .form {
+  outline: none;
   margin-bottom: 20px;
 }
 
 .form__input {
   padding: 10px;
-  border:1px solid grey;
+  outline: 2px solid transparent;
+  outline-offset: 7px;
+  border:1px solid gray;
   border-radius: 10px;
+  transition: outline-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
+}
+
+.form__input:focus,
+.form__input:hover {
+  outline-color: brown;
+}
+
+.form__input:hover {
+  border-color: brown;
 }
 
 .list {
   position: relative;
-
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -78,11 +102,23 @@ body {
   position: absolute;
   height: inherit;
   width: inherit;
+  outline: 2px solid transparent;
+  outline-offset: 5px;
   border: 5px solid white;
   border-radius: 10px;
   background-size: cover;
   background-position: center;
   background-image: url(../images/shirtUp.jpg);
+  cursor: pointer;
+  transition: outline-color 0.3s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+.list__shirt:focus {
+  outline-color: brown;
+}
+
+.list__shirt:hover {
+  border-color: brown;
 }
 
 .list__item {
@@ -94,10 +130,7 @@ body {
   border-radius: 10px;
   color: white;
   font-size: 100px;
-  background-color: grey;
+  background-position: center;
+  background-size: cover;
+  background-image: url(../images/brown.jpg);
 }
-
-.input {
-  padding: 0;
-}
-
