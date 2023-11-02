@@ -97,6 +97,7 @@
 ### 2.9. Стили для `.list__item`
 
 - `.list__item`: Устанавливает стили для элементов игры (карточек).
+
 ## 3. JavaScript (main.js)
 
 ### - Функция `createNumbersArray(count)`

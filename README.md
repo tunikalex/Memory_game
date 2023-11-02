@@ -1,6 +1,4 @@
-
-
-## Game Description
+# 1. Game Description
 
 "Memory Game" is an interactive game where players are challenged to test their memory and ability to find pairs among cards. The goal of the game is to open all cards in pairs, matching their values.
 
@@ -16,17 +14,17 @@ The game consists of the following key elements:
 
 The game is implemented using HTML, CSS, and JavaScript and provides an interactive experience for enhancing the player's memory and attentiveness.
 
-## 1. HTML
+## 2. HTML
 
-### 1.1. Element `<!DOCTYPE html>`
+### 2.1. Element `<!DOCTYPE html>`
 
 - `<!DOCTYPE html>`: Declares the document type as HTML5.
 
-### 1.2. Element `<html>`
+### 2.2. Element `<html>`
 
 - `<html lang="en">`: The root element of the HTML document with the language set to English.
 
-### 1.3. Element `<head>`
+### 2.3. Element `<head>`
 
 - `<head>`: Contains metadata about the document.
 
@@ -44,13 +42,13 @@ The game is implemented using HTML, CSS, and JavaScript and provides an interact
 
 - `<script defer src="main.js"></script>`: Links the external script `main.js` to the document with the `defer` attribute.
 
-### 1.4. Element `<body>`
+### 2.4. Element `<body>`
 
 - `<body>`: Represents the content of the page.
 
-## 2. CSS
+## 3. CSS
 
-### 2.1. Common Styles
+### 3.1. Common Styles
 
 - `box-sizing`: Sets the `box-sizing` property to `border-box` for all elements on the page.
 
@@ -62,75 +60,76 @@ The game is implemented using HTML, CSS, and JavaScript and provides an interact
 
 - `body`: Sets a minimum width, font, and background for the page.
 
-### 2.2. Global Classes
+### 3.2. Global Classes
 
 - `.flex`: Applies `display: flex` to elements.
 
 - `.opacity`: Sets the opacity property to 0 for elements.
 
-### 2.3. Styles for `.container`
+### 3.3. Styles for `.container`
 
 - `.container`: Centers text, provides a fixed width, and sets a background.
 
-### 2.4. Styles for `.title`
+### 3.4. Styles for `.title`
 
 - `.title`: Removes margins and defines text color.
 
-### 2.5. Styles for `.main__win`
+### 3.5. Styles for `.main__win`
 
 - `.main__win`: Fixes the position, centers text, sets dimensions, and adds a background image.
 
-### 2.6. Styles for `.form`
+### 3.6. Styles for `.form`
 
 - `.form`: Defines styles for forms.
 
 - `.form__input`: Styles the text input fields.
 
-### 2.7. Styles for `.list`
+### 3.7. Styles for `.list`
 
 - `.list`: Sets styles for the container of game cards.
 
-### 2.8. Styles for `.list__shirt`
+### 3.8. Styles for `.list__shirt`
 
 - `.list__shirt`: Styles the game cards.
 
-### 2.9. Styles for `.list__item`
+### 3.9. Styles for `.list__item`
 
 - `.list__item`: Styles the game elements (cards).
-## 3. JavaScript (main.js)
 
-### - Function `createNumbersArray(count)`
+## 4. JavaScript (main.js)
+
+### 4.1. - Function `createNumbersArray(count)`
 
 - Generates an array of numbers with pairs of identical values.
 
 - Parameter `count` (default 8) - the number of elements in the array.
 
-### - Function `shuffle(arr)`
+### 4.2. - Function `shuffle(arr)`
 
 - Shuffles the elements of the `arr` array using the Fisher-Yates algorithm.
 
 - Parameter `arr` - the array to be shuffled.
 
-### - Function `howMuch(callback)`
+### 4.3. - Function `howMuch(callback)`
 
 - Handles the input of the quantity of game cards by the user and calls the provided callback function.
 
 - `callback`: The callback function that will be called with the quantity of game cards.
 
-### - Function `createInput()`
+### 4.4. - Function `createInput()`
 
 - Creates HTML elements for inputting the quantity of game cards and adds them to the page.
 
-### - Function `crateGamesTable(arr)`
+### 4.5. - Function `crateGamesTable(arr)`
 
 - Creates the game cards table based on the `arr` array and adds it to the page. If the table already exists, it will be recreated.
 
 - `arr`: An array of numbers to be used in the game.
 
-### - Function `playGame()`
+### 4.6. - Function `playGame()`
 
 - Manages the game process, handles card clicks, and determines if the cards match. If all cards are opened, the game ends.
 
-### - Function `startGame()`
+### 4.7. - Function `startGame()`
 
 - Initiates the start of the game, creates the input for the quantity of game cards, and manages the game process.
