@@ -22,13 +22,16 @@ img {
 }
 
 body {
-  min-width: 1300px;
   font-family: "OpenSuns", "Arial", "sans-serif";
   line-height: normal;
   background: #f1f1f1;
 }
 
 /* glob */
+:root {
+  --brown-color: brown;
+}
+
 .flex {
   display: flex;
 }
@@ -51,16 +54,51 @@ body {
   color: brown;
 }
 
-.main__win {
-  position: fixed;
-  text-align: center;
-  width: inherit;
-  height: 80%;
-  background-repeat: no-repeat;
+.win {
+  height: 0;
+  opacity: 0;
+}
+
+.win__back {
+  position: absolute;
+  width: 1170px;
+  height: 65%;
   background-position: center;
   background-size: cover;
   background-image: url(../images/you-win.jpg);
   z-index: 10;
+}
+
+.win__btn {
+  width: 160px;
+  height: 40px;
+  outline: 2px solid transparent;
+  outline-offset: 7px;
+  background-color: lightgreen;
+  border: 1px solid var(--brown-color);
+  border-radius: 10px;
+  margin-bottom: 25px;
+  color: black;
+  transition: outline-color 0.4s ease-in-out,
+    background-color 0.4s ease-in-out,
+    color 0.4s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+
+.win__btn:focus-visible {
+  outline-color: var(--brown-color);
+}
+
+.win__btn:hover {
+  background-color: rgba(18, 130, 18, 0.6);
+  border-color: white;
+  color: white;
+}
+
+.win__btn:active {
+  width: 150px;
+  height: 30px;
+  margin-bottom: 35px;
 }
 
 .form {
@@ -70,20 +108,21 @@ body {
 
 .form__input {
   padding: 10px;
+  width: 250px;
   outline: 2px solid transparent;
   outline-offset: 7px;
-  border:1px solid gray;
+  border: 1px solid gray;
   border-radius: 10px;
   transition: outline-color 0.4s ease-in-out, border-color 0.4s ease-in-out;
 }
 
 .form__input:focus,
 .form__input:hover {
-  outline-color: brown;
+  outline-color: var(--brown-color);
 }
 
 .form__input:hover {
-  border-color: brown;
+  border-color: var(--brown-color);
 }
 
 .list {
@@ -94,8 +133,7 @@ body {
   padding: 45px;
   gap: 20px;
   flex-wrap: wrap;
-  gap: 20px;
-  background-image: url(../images/paper800.jpg) ;
+  background-image: url(../images/paper800.jpg);
 }
 
 .list__shirt {
@@ -114,11 +152,11 @@ body {
 }
 
 .list__shirt:focus {
-  outline-color: brown;
+  outline-color: var(--brown-color);
 }
 
 .list__shirt:hover {
-  border-color: brown;
+  border-color: var(--brown-color);
 }
 
 .list__item {
@@ -134,3 +172,7 @@ body {
   background-size: cover;
   background-image: url(../images/brown.jpg);
 }
+
+/* .list__item:nth-child(4n) {
+
+} */

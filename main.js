@@ -1,6 +1,5 @@
 function createNumbersArray(count = 8) {
   const arr = [];
-  // generate array pear of number
   for (let i_count = 1; i_count <= count; i_count++) {
     arr.push(i_count, i_count);
   }
@@ -27,22 +26,20 @@ function howMuch(callback) {
   document.body.querySelector('input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       console.log(`сработала функция howMuch`); //лог контроля
-      const win = document.querySelector('#win');
-      win.classList.remove('main__win');
 
       const inputValue = Number(this.value);
 
       if (isNaN(inputValue)) {
         alert("The number cannot be text. \nTry entering it again.");
-      } else if (inputValue < 6) {
-        alert("The number cannot be less than 6. \nTry entering another number.");
-      } else if (inputValue > 80) {
-        alert("The number cannot be more than 80. \nTry entering another number.");
+      } else if (inputValue < 2) {
+        alert("The number cannot be less than 2. \nTry entering another number.");
+      } else if (inputValue > 10) {
+        alert("The number cannot be more than 10. \nTry entering another number.");
       } else if (inputValue % 2 !== 0) {
         alert("For this game the number of cards must be even");
       } else {
         e.preventDefault();
-        const quantityNum = inputValue / 2;
+        const quantityNum = inputValue;
         this.value = '';
         callback(quantityNum);
       }
@@ -57,7 +54,8 @@ function createInput() {
   const form = document.createElement('form')
   const input = document.createElement('input');
   const win = document.createElement('div');
-
+  const winBack = document.createElement('div');
+  const restartBtn = document.createElement('button');
 
   title.classList.add('title')
   main.classList.add('container');
@@ -65,17 +63,22 @@ function createInput() {
   form.classList.add('form')
   input.classList.add('form__input');
   input.id = 'input';
-  // win.classList.add('win');
   win.id = 'win';
+  win.classList.add('main__win', 'win')
+  winBack.classList.add('win__back')
+  restartBtn.classList.add('win__btn');
 
-  title.textContent = 'Memory Game'
-  input.placeholder = 'Enter quantity kards'
+  title.textContent = 'Memory Game';
+  restartBtn.textContent = 'Restert Game';
+  input.placeholder = 'Enter quantity numbers for games';
 
   document.body.appendChild(main);
   main.appendChild(title);
   main.appendChild(form);
   form.appendChild(input);
   form.after(win);
+  win.appendChild(restartBtn);
+  win.appendChild(winBack);
 }
 
 
@@ -144,7 +147,7 @@ function playGame() {
         if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) {
           console.log(`сработал win`); // лог контроля
           const win = document.querySelector('#win');
-          win.classList.add('main__win');
+          win.classList.remove('win');
         }
 
       } else if (openLastsCards.length % 3 == 0) {
