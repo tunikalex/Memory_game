@@ -6,6 +6,7 @@ function createNumbersArray(count = 8) {
   return arr;
 }
 
+
 function shuffle(arr) {
   const shuffleArr = arr;
   const maxIndex = shuffleArr.length - 1;
@@ -22,12 +23,14 @@ function shuffle(arr) {
   return shuffleArr;
 }
 
+
 function howMuch(callback) {
   document.body.querySelector('input').addEventListener('keydown', function (e) {
+
     if (e.key === 'Enter') {
       console.log(`сработала функция howMuch`); //лог контроля
 
-      const inputValue = Number(this.value);
+      const inputValue = Number(this.value)
 
       if (isNaN(inputValue)) {
         alert("The number cannot be text. \nTry entering it again.");
@@ -67,6 +70,7 @@ function createInput() {
   win.classList.add('main__win', 'win')
   winBack.classList.add('win__back')
   restartBtn.classList.add('win__btn');
+  restartBtn.id = 'winBtn';
 
   title.textContent = 'Memory Game';
   restartBtn.textContent = 'Restert Game';
@@ -116,6 +120,15 @@ function crateGamesTable(arr) {
   }
 };
 
+
+function clickResBtn() {
+  let btn = document.getElementById('winBtn');
+  btn.addEventListener('click', () => {
+    startGame();
+  })
+}
+
+
 // функция игрового процесса
 function playGame() {
   const cardsList = document.querySelectorAll('.list__shirt');
@@ -144,14 +157,17 @@ function playGame() {
         };
         element.classList.add('open'); // добавили класс для маркировки открытых карт
         openLastsCards = []; // обнуляем активные открытые карты
-        if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) {
+
+        if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) { // если открыты все карты
           console.log(`сработал win`); // лог контроля
           const win = document.querySelector('#win');
           win.classList.remove('win');
+
+          const resNumber = clickResBtn();
         }
 
       } else if (openLastsCards.length % 3 == 0) {
-        console.log(`__ сработал else IF __`); // лог контроля
+        console.log(`click __ сработал else IF __`); // лог контроля
         let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
 
         for (iOpen of allOpen) { // перебираем все открытые карты
@@ -168,7 +184,7 @@ function playGame() {
         element.classList.add('open') // обозначаем карту как открытую
 
       } else {
-        console.log(`сработал else`); // лог контроля
+        console.log(`click сработал else`); // лог контроля
         element.classList.add('open') // обозначаем карту как открытую
       }
     });
@@ -176,9 +192,12 @@ function playGame() {
 }
 
 
-function startGame() {
+function startGame(num = 4) {
+  document.body.innerHTML = '';
   createInput();
+  const win = document.getElementById('win');
   howMuch(quantityNums => {
+    console.log('сработал startGame ');
     let originArr = createNumbersArray(count = quantityNums);
     const shuffleArr = shuffle(arr = originArr);
     crateGamesTable(arr = shuffleArr);
@@ -186,5 +205,5 @@ function startGame() {
   });
 }
 
-startGame();
 
+startGame();
