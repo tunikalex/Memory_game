@@ -91,6 +91,10 @@ function createInput() {
   form.after(win);
   win.appendChild(restartBtn);
   win.appendChild(winBack);
+
+  let arrOriginal = createNumbersArray(count = 4);
+  let shuffleArr = shuffle(arr = arrOriginal);
+  crateGamesTable(arr = shuffleArr);
 }
 
 
