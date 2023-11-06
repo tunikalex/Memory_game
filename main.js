@@ -92,9 +92,10 @@ function createInput() {
   win.appendChild(restartBtn);
   win.appendChild(winBack);
 
-  let arrOriginal = createNumbersArray(count = 4);
+  let arrOriginal = createNumbersArray(count = 8);
   let shuffleArr = shuffle(arr = arrOriginal);
   crateGamesTable(arr = shuffleArr);
+  playGame()
 }
 
 
@@ -176,7 +177,7 @@ function playGame() {
         openLastsCards = []; // обнуляем активные открытые карты
 
         if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) { // если открыты все карты
-          console.log(`сработал win, \n конажатий ${count} \n ||||||||||||||||||||||||||||||`); // лог контроля
+          console.log(`сработал win, \n нажатий ${count} \n ||||||||||||||||||||||||||||||`); // лог контроля
           const win = document.querySelector('#win');
           win.classList.remove('win');
 
@@ -241,7 +242,7 @@ function reStartGame() {
   win.classList.add('win')
 
   console.log('сработал REstartGame');
-  let originArr = createNumbersArray(count = 4);
+  let originArr = createNumbersArray(count = 8);
   const shuffleArr = shuffle(arr = originArr);
   crateGamesTable(arr = shuffleArr);
   startGame()
