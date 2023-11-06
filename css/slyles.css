@@ -59,46 +59,18 @@ body {
   opacity: 0;
 }
 
+.main__win {
+  width: inherit;
+}
+
 .win__back {
   position: absolute;
   width: inherit;
-  height: 80%;
+  height: 50%;
   background-position: center;
   background-size: cover;
   background-image: url(../images/you-win.jpg);
   z-index: 10;
-}
-
-.win__btn {
-  width: 160px;
-  height: 40px;
-  outline: 2px solid transparent;
-  outline-offset: 7px;
-  background-color: lightgreen;
-  border: 1px solid var(--brown-color);
-  border-radius: 10px;
-  margin-bottom: 15px;
-  color: black;
-  transition: outline-color 0.4s ease-in-out,
-    background-color 0.4s ease-in-out,
-    color 0.4s ease-in-out,
-    border-color 0.3s ease-in-out;
-}
-
-.win__btn:focus-visible {
-  outline-color: var(--brown-color);
-}
-
-.win__btn:hover {
-  background-color: rgba(18, 130, 18, 0.6);
-  border-color: white;
-  color: white;
-}
-
-.win__btn:active {
-  width: 150px;
-  height: 30px;
-  margin-bottom: 35px;
 }
 
 .form {
@@ -109,6 +81,7 @@ body {
 .form__input {
   padding: 10px;
   width: 250px;
+  margin-right: 20px;
   outline: 2px solid transparent;
   outline-offset: 7px;
   border: 1px solid gray;
@@ -123,6 +96,65 @@ body {
 
 .form__input:hover {
   border-color: var(--brown-color);
+}
+
+.form__btn,
+.win__btn {
+  width: 160px;
+  height: 40px;
+  margin-bottom: 15px;
+  outline: 2px solid transparent;
+  outline-offset: 7px;
+  background-color: lightgreen;
+  border: 1px solid var(--brown-color);
+  border-radius: 10px;
+  color: black;
+  cursor: pointer;
+  transition: outline-color 0.4s ease-in-out,
+    background-color 0.4s ease-in-out,
+    color 0.4s ease-in-out,
+    border-color 0.3s ease-in-out;
+}
+
+.gray-btn {
+  margin: 0;
+  width: 80px;
+  height: 40px;
+  outline: 2px solid transparent;
+  outline-offset: 7px;
+  background-color: rgb(177, 177, 177);
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
+}
+
+.form__btn {
+  margin: 0;
+  width: 80px;
+}
+
+.form__btn:active {
+  width: 76px;
+  height: 35px;
+  margin-left: 4px;
+}
+
+.form__btn:focus-visible,
+.win__btn:focus-visible {
+  outline-color: var(--brown-color);
+}
+
+.form__btn:hover,
+.win__btn:hover {
+  background-color: rgba(18, 130, 18, 0.6);
+  border-color: white;
+  color: white;
+}
+
+.win__btn:active {
+  width: 150px;
+  height: 30px;
+  margin-bottom: 35px;
 }
 
 .list {
@@ -169,7 +201,3 @@ body {
   background-size: cover;
   background-image: url(../images/brown.jpg);
 }
-
-/* .list__item:nth-child(4n) {
-
-} */

@@ -23,40 +23,69 @@ function shuffle(arr) {
   return shuffleArr;
 }
 
-
 function howMuch(callback) {
   const input = document.body.querySelector('input');
+  const btn = document.body.querySelector('#formBtn');
+
+  btn.addEventListener('click', () => {
+    const inputValue = Number(input.value);
+    btn.disabled = 'disabled';
+    btn.classList.add('gray-btn');
+    btn.classList.remove('form__btn');
+
+    console.log(`сработало нажатие на кнопку START, inputValue = ${inputValue}`);
+    if (isNaN(inputValue)) {
+      alert("The number cannot be text. \nTry entering it again.");
+    } else if (inputValue < 2) {
+      alert("The number cannot be less than 2. \nTry entering another number.");
+    } else if (inputValue > 10) {
+      alert("The number cannot be more than 10. \nTry entering another number.");
+    } else if (inputValue % 2 !== 0) {
+      input.placeholder = 'The number of cards must be even';
+      input.value = '';
+      callback(inputValue - 1);
+    } else {
+      input.placeholder = 'Enter quantity numbers for games';
+      input.value = '';
+      callback(inputValue);
+    }
+  });
 
   input.addEventListener('keydown', function (e) {
+    const btn = document.body.querySelector('#formBtn');
+    btn.removeAttribute('disabled');
+    btn.classList.add('form__btn');
+    btn.classList.remove('gray-btn');
 
     if (e.key === 'Enter') {
-      console.log(`сработала функция howMuch`); //лог контроля
-
-      const inputValue = Number(this.value)
+      e.preventDefault(); // Предотвращаем стандартное действие браузера по отправке формы
+      console.log(`сработала функция howMuch`);
+      const inputValue = Number(this.value);
 
       if (isNaN(inputValue)) {
         alert("The number cannot be text. \nTry entering it again.");
       } else if (inputValue < 2) {
         alert("The number cannot be less than 2. \nTry entering another number.");
+        this.value = '';
       } else if (inputValue > 10) {
         alert("The number cannot be more than 10. \nTry entering another number.");
+        this.value = '';
       } else if (inputValue % 2 !== 0) {
-        e.preventDefault();
-        const quantityNum = inputValue - 1;
         input.placeholder = 'The number of cards must be even';
         this.value = '';
-        callback(quantityNum);
+        callback(inputValue - 1);
       } else {
-        e.preventDefault();
-        const quantityNum = inputValue;
+        input.placeholder = 'Enter quantity numbers for games';
         this.value = '';
-        input.placeholder = 'Enter quantity numbers for games'
-        callback(quantityNum);
+        callback(inputValue);
       }
+    btn.disabled = 'disabled';
+    btn.classList.add('gray-btn');
+    btn.classList.remove('form__btn');
+
     }
   });
 }
-
 
 function createInput() {
   console.log(`происходит запись шапки`);
@@ -64,6 +93,7 @@ function createInput() {
   const title = document.createElement('h1')
   const form = document.createElement('form')
   const input = document.createElement('input');
+  const button = document.createElement('button');
   const win = document.createElement('div');
   const winBack = document.createElement('div');
   const restartBtn = document.createElement('button');
@@ -71,14 +101,21 @@ function createInput() {
   title.classList.add('title')
   main.classList.add('container');
   main.id = 'main';
-  form.classList.add('form')
+  form.classList.add('form');
   input.classList.add('form__input');
   input.id = 'input';
   win.id = 'win';
   win.classList.add('main__win', 'win')
   winBack.classList.add('win__back')
   restartBtn.classList.add('win__btn');
+  button.classList.add('form__btn');
+  button.id = 'formBtn';
+  button.type = 'button';
   restartBtn.id = 'winBtn';
+  button.textContent = 'Start';
+  button.disabled = 'disabled';
+  button.classList.add('gray-btn');
+  button.classList.remove('form__btn');
 
   title.textContent = 'Memory Game';
   restartBtn.textContent = 'Restart Game';
@@ -88,14 +125,15 @@ function createInput() {
   main.appendChild(title);
   main.appendChild(form);
   form.appendChild(input);
+  form.appendChild(button);
   form.after(win);
   win.appendChild(restartBtn);
   win.appendChild(winBack);
 
-  let arrOriginal = createNumbersArray(count = 8);
-  let shuffleArr = shuffle(arr = arrOriginal);
+  const arrOriginal = createNumbersArray(count = 8);
+  const shuffleArr = shuffle(arr = arrOriginal);
   crateGamesTable(arr = shuffleArr);
-  playGame()
+  playGame();
 }
 
 
@@ -103,7 +141,7 @@ function crateGamesTable(arr) {
   const list = document.querySelector('ul');
 
   if (list === null) {
-    let list = document.createElement('ul');
+    const list = document.createElement('ul');
     list.classList.add('list');
     document.querySelector('#main').appendChild(list);
 
@@ -169,7 +207,7 @@ function playGame() {
 
       if (openLastsCards.length == 2 && openLastsCards[0] == openLastsCards[1]) {
         console.log(`сработало равенство карт`); // лог контроля
-        let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
+        const allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
         for (iOpen of allOpen) { // делаем кнопки таких карт неактивными
           iOpen.disabled = true;
         };
@@ -188,7 +226,7 @@ function playGame() {
 
       } else if (openLastsCards.length % 3 == 0) {
         console.log(`click __ сработал else IF __`); // лог контроля
-        let allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
+        const allOpen = document.body.querySelectorAll('.opacity'); // выбираем все открытые карты
 
         for (iOpen of allOpen) { // перебираем все открытые карты
           // если список последних карт содержит id открытой карты)
@@ -223,7 +261,7 @@ function startGame() {
       win.classList.add('win');
     }
 
-    let originArr = createNumbersArray(count = quantityNums);
+    const originArr = createNumbersArray(count = quantityNums);
     const shuffleArr = shuffle(arr = originArr);
     crateGamesTable(arr = shuffleArr);
     playGame();
@@ -242,7 +280,7 @@ function reStartGame() {
   win.classList.add('win')
 
   console.log('сработал REstartGame');
-  let originArr = createNumbersArray(count = 8);
+  const originArr = createNumbersArray(count = 8);
   const shuffleArr = shuffle(arr = originArr);
   crateGamesTable(arr = shuffleArr);
   startGame()
