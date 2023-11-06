@@ -25,7 +25,9 @@ function shuffle(arr) {
 
 
 function howMuch(callback) {
-  document.body.querySelector('input').addEventListener('keydown', function (e) {
+  const input = document.body.querySelector('input');
+
+  input.addEventListener('keydown', function (e) {
 
     if (e.key === 'Enter') {
       console.log(`сработала функция howMuch`); //лог контроля
@@ -39,11 +41,16 @@ function howMuch(callback) {
       } else if (inputValue > 10) {
         alert("The number cannot be more than 10. \nTry entering another number.");
       } else if (inputValue % 2 !== 0) {
-        alert("For this game the number of cards must be even");
+        e.preventDefault();
+        const quantityNum = inputValue - 1;
+        input.placeholder = 'The number of cards must be even';
+        this.value = '';
+        callback(quantityNum);
       } else {
         e.preventDefault();
         const quantityNum = inputValue;
         this.value = '';
+        input.placeholder = 'Enter quantity numbers for games'
         callback(quantityNum);
       }
     }
@@ -52,6 +59,7 @@ function howMuch(callback) {
 
 
 function createInput() {
+  console.log(`происходит запись шапки`);
   const main = document.createElement('main');
   const title = document.createElement('h1')
   const form = document.createElement('form')
@@ -73,7 +81,7 @@ function createInput() {
   restartBtn.id = 'winBtn';
 
   title.textContent = 'Memory Game';
-  restartBtn.textContent = 'Restert Game';
+  restartBtn.textContent = 'Restart Game';
   input.placeholder = 'Enter quantity numbers for games';
 
   document.body.appendChild(main);
@@ -124,25 +132,30 @@ function crateGamesTable(arr) {
 function clickResBtn() {
   let btn = document.getElementById('winBtn');
   btn.addEventListener('click', () => {
-    startGame();
+    reStartGame();
   })
 }
 
 
 // функция игрового процесса
 function playGame() {
+  let count = 0; // счётчик нажатий на карточки
   const cardsList = document.querySelectorAll('.list__shirt');
   let openLastsCards = []; // создали массив для id нажатых карточек
 
   // перебираем массив с .list__shirt и применяем к каждому элементу обработку события click
   cardsList.forEach((element) => {
     element.addEventListener('click', function (event) {
+      count++;
+
+      if (input.placeholder == 'The number of cards must be even') { // если пользователь вводил нечётное число карт, обновляес сообщение на стандартное
+        input.placeholder = 'Enter quantity numbers for games';
+      }
 
       element.classList.add('opacity'); // делаем карточку видимой
       openLastsCards.push(element.id); // формируем массив с id нажатых карточек
 
-      // если открыты две активных карты и их id равны
-      if (element.classList.contains('open')) {
+      if (element.classList.contains('open')) {       // если открыты две активных карты и их id равны
         console.log('сработало Open'); // лог контроля
         openLastsCards.pop();
         element.disabled = true;
@@ -159,11 +172,13 @@ function playGame() {
         openLastsCards = []; // обнуляем активные открытые карты
 
         if (document.querySelectorAll('.list__shirt').length === document.querySelectorAll('.opacity').length) { // если открыты все карты
-          console.log(`сработал win`); // лог контроля
+          console.log(`сработал win, \n конажатий ${count} \n ||||||||||||||||||||||||||||||`); // лог контроля
           const win = document.querySelector('#win');
           win.classList.remove('win');
 
-          const resNumber = clickResBtn();
+          const input = document.querySelector('#input');
+          input.placeholder = `number of clicks: ${count}`;
+          clickResBtn();
         }
 
       } else if (openLastsCards.length % 3 == 0) {
@@ -175,7 +190,7 @@ function playGame() {
           if (openLastsCards.includes(iOpen.id)) {
             iOpen.classList.remove('opacity');
             iOpen.disabled = false
-            iOpen.classList.remove('open')
+            iOpen.classList.remove('open');
           }
         }
         element.classList.add('opacity') // делаем
@@ -192,18 +207,41 @@ function playGame() {
 }
 
 
-function startGame(num = 4) {
+function startGame() {
   document.body.innerHTML = '';
+
   createInput();
   const win = document.getElementById('win');
   howMuch(quantityNums => {
-    console.log('сработал startGame ');
+    console.log('сработал startGame');
+    if (!win.classList.contains('win')) {
+      win.classList.add('win');
+    }
+
     let originArr = createNumbersArray(count = quantityNums);
     const shuffleArr = shuffle(arr = originArr);
     crateGamesTable(arr = shuffleArr);
     playGame();
   });
-}
+};
+
+
+function reStartGame() {
+
+  if (document.body.querySelector('.form') === null) {
+    console.log(`reStartGame - ('.form') == null`);
+    createInput();
+  }
+
+  const win = document.getElementById('win');
+  win.classList.add('win')
+
+  console.log('сработал REstartGame');
+  let originArr = createNumbersArray(count = 4);
+  const shuffleArr = shuffle(arr = originArr);
+  crateGamesTable(arr = shuffleArr);
+  startGame()
+};
 
 
 startGame();
