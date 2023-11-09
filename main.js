@@ -23,6 +23,7 @@ function shuffle(arr) {
   return shuffleArr;
 }
 
+
 function howMuch(callback) {
   const input = document.body.querySelector('input');
   const btn = document.body.querySelector('#formBtn');
@@ -36,18 +37,18 @@ function howMuch(callback) {
     console.log(`сработало нажатие на кнопку START, inputValue = ${inputValue}`);
     if (isNaN(inputValue)) {
       alert("The number cannot be text. \nTry entering it again.");
-    } else if (inputValue < 2) {
-      alert("The number cannot be less than 2. \nTry entering another number.");
-    } else if (inputValue > 10) {
-      alert("The number cannot be more than 10. \nTry entering another number.");
+    } else if (inputValue < 4) {
+      alert("The number cannot be less than 4. \nTry entering another number.");
+    } else if (inputValue > 20) {
+      alert("The number cannot be more than 20. \nTry entering another number.");
     } else if (inputValue % 2 !== 0) {
-      input.placeholder = 'The number of cards must be even';
+      input.placeholder = 'The quantity of cards must be even';
       input.value = '';
-      callback(inputValue - 1);
+      callback((inputValue - 1) / 2);
     } else {
       input.placeholder = 'Enter quantity numbers for games';
       input.value = '';
-      callback(inputValue);
+      callback(inputValue / 2);
     }
   });
 
@@ -64,32 +65,34 @@ function howMuch(callback) {
 
       if (isNaN(inputValue)) {
         alert("The number cannot be text. \nTry entering it again.");
-      } else if (inputValue < 2) {
+      } else if (inputValue < 4) {
         alert("The number cannot be less than 2. \nTry entering another number.");
         this.value = '';
-      } else if (inputValue > 10) {
-        alert("The number cannot be more than 10. \nTry entering another number.");
+      } else if (inputValue > 20) {
+        alert("The number cannot be more than 20. \nTry entering another number.");
         this.value = '';
       } else if (inputValue % 2 !== 0) {
-        input.placeholder = 'The number of cards must be even';
+        input.placeholder = 'The quantity of cards must be even';
         this.value = '';
-        callback(inputValue - 1);
+        callback((inputValue - 1) / 2);
       } else {
         input.placeholder = 'Enter quantity numbers for games';
         this.value = '';
-        callback(inputValue);
+        callback(inputValue / 2);
       }
-    btn.disabled = 'disabled';
-    btn.classList.add('gray-btn');
-    btn.classList.remove('form__btn');
+      btn.disabled = 'disabled';
+      btn.classList.add('gray-btn');
+      btn.classList.remove('form__btn');
 
     }
   });
 }
 
+
 function createInput() {
   console.log(`происходит запись шапки`);
   const main = document.createElement('main');
+  const rule = document.createElement('p');
   const title = document.createElement('h1')
   const form = document.createElement('form')
   const input = document.createElement('input');
@@ -101,6 +104,8 @@ function createInput() {
   title.classList.add('title')
   main.classList.add('container');
   main.id = 'main';
+  rule.classList.add('main__rule');
+  rule.id = 'rule';
   form.classList.add('form');
   input.classList.add('form__input');
   input.id = 'input';
@@ -118,10 +123,12 @@ function createInput() {
   button.classList.remove('form__btn');
 
   title.textContent = 'Memory Game';
+  rule.textContent = 'Use an even number of cards from 4 to 20';
   restartBtn.textContent = 'Restart Game';
   input.placeholder = 'Enter quantity numbers for games';
 
   document.body.appendChild(main);
+  main.appendChild(rule);
   main.appendChild(title);
   main.appendChild(form);
   form.appendChild(input);
@@ -141,6 +148,7 @@ function crateGamesTable(arr) {
   const list = document.querySelector('ul');
 
   if (list === null) {
+    console.log('сработал crateGamesTable IF');
     const list = document.createElement('ul');
     list.classList.add('list');
     document.querySelector('#main').appendChild(list);
@@ -155,8 +163,10 @@ function crateGamesTable(arr) {
       list.append(item);
       item.append(shirtUp);
     }
+    list.classList.add('four-columns');
 
   } else {
+    console.log('сработал crateGamesTable ELSE');
     list.innerHTML = '';
     for (let iNum of arr) {
       const item = document.createElement('li');
@@ -167,9 +177,28 @@ function crateGamesTable(arr) {
       shirtUp.id = iNum;
       list.append(item);
       item.append(shirtUp);
-    }
+    };
+    if (arr.length == 6) {
+      list.classList.remove('seven-columns','three-columns', 'six-columns', 'two-columns', 'five-columns', 'four-columns');
+      list.classList.add('three-columns');
+    } else if (arr.length == 4) {
+      list.classList.remove('seven-columns', 'two-columns', 'six-columns', 'three-columns', 'five-columns', 'four-columns');
+      list.classList.add('two-columns');
+    } else if (arr.length == 10 || arr.length == 20) {
+      list.classList.remove('seven-columns', 'five-columns', 'six-columns', 'three-columns', 'two-columns', 'four-columns');
+      list.classList.add('five-columns');
+    } else if (arr.length == 14) {
+      list.classList.remove('three-columns', 'seven-columns', 'six-columns', 'five-columns', 'two-columns', 'four-columns');
+      list.classList.add('seven-columns');
+    } else if (arr.length == 18) {
+      list.classList.remove('seven-columns', 'six-columns', 'three-columns', 'five-columns', 'two-columns', 'four-columns');
+      list.classList.add('six-columns');
+    } else {
+      list.classList.remove('seven-columns', 'four-columns', 'six-columns', 'three-columns', 'five-columns', 'two-columns');
+      list.classList.add('four-columns');
+    };
   }
-};
+}
 
 
 function clickResBtn() {
@@ -271,11 +300,6 @@ function startGame() {
 
 function reStartGame() {
 
-  if (document.body.querySelector('.form') === null) {
-    console.log(`reStartGame - ('.form') == null`);
-    createInput();
-  }
-
   const win = document.getElementById('win');
   win.classList.add('win')
 
@@ -287,4 +311,4 @@ function reStartGame() {
 };
 
 
-startGame();
+startGame()

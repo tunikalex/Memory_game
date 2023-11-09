@@ -41,11 +41,24 @@ body {
 }
 
 .container {
+  position: relative;
   text-align: center;
-  width: 800px;
+  min-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 25px 0;
   background-image: url(../images/background-tekstur.jpg);
+}
+
+.main__rule {
+  position: absolute;
+  left: 70px;
+  width: 150px;
+  margin: 0;
+  font-variant: petite-caps;
+  font-size: 20px;
+  font-family: monospace;
+  color: #7a7a7a;
 }
 
 .title {
@@ -60,13 +73,14 @@ body {
 }
 
 .main__win {
-  width: inherit;
+  max-width: 100%;
+  min-width: 800px;
 }
 
 .win__back {
   position: absolute;
-  width: inherit;
-  height: 50%;
+  width: 1000px;
+  height: 80%;
   background-position: center;
   background-size: cover;
   background-image: url(../images/you-win.jpg);
@@ -159,9 +173,32 @@ body {
 
 .list {
   text-align: -webkit-center;
-  columns: 4;
   padding: 20px 50px 10px 50px;
   background-image: url(../images/paper800.jpg);
+}
+
+.seven-columns {
+  columns: 7;
+}
+
+.six-columns {
+  columns: 6;
+}
+
+.five-columns {
+  columns: 5;
+}
+
+.four-columns {
+  columns: 4;
+}
+
+.three-columns {
+  columns: 3;
+}
+
+.two-columns {
+  columns: 2;
 }
 
 .list__shirt {
@@ -190,10 +227,10 @@ body {
 .list__item {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   align-items: center;
-  height: 140px;
-  width: 140px;
+  height: 175px;
+  width: 125px;
   border-radius: 10px;
   color: white;
   font-size: 100px;
