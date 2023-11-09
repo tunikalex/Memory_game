@@ -172,33 +172,32 @@ body {
 }
 
 .list {
-  text-align: -webkit-center;
+  justify-content: center;
   padding: 20px 50px 10px 50px;
+  flex-wrap: wrap;
+  column-gap: 80px;
+  row-gap: 10px;
   background-image: url(../images/paper800.jpg);
 }
 
-.seven-columns {
-  columns: 7;
-}
-
-.six-columns {
-  columns: 6;
-}
-
-.five-columns {
-  columns: 5;
-}
-
-.four-columns {
-  columns: 4;
+.two-columns {
+  column-gap: 270px;
 }
 
 .three-columns {
-  columns: 3;
+  column-gap: 140px;
 }
 
-.two-columns {
-  columns: 2;
+.five-columns {
+  column-gap: 60px;
+}
+
+.six-columns {
+  column-gap: 10px;
+}
+
+.seven-columns {
+  column-gap: 4px;
 }
 
 .list__shirt {
@@ -238,3 +237,4 @@ body {
   background-size: cover;
   background-image: url(../images/brown.jpg);
 }
+

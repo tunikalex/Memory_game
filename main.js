@@ -150,7 +150,7 @@ function crateGamesTable(arr) {
   if (list === null) {
     console.log('сработал crateGamesTable IF');
     const list = document.createElement('ul');
-    list.classList.add('list');
+    list.classList.add('list', 'flex');
     document.querySelector('#main').appendChild(list);
 
     for (let iNum of arr) {
